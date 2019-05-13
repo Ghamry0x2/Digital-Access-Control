@@ -1,0 +1,103 @@
+-- VHDL data flow description generated from `coder`
+--		date : Sun Apr 21 05:03:08 2019
+
+
+-- Entity Declaration
+
+ENTITY coder IS
+  PORT (
+  daytime : in BIT;	-- daytime
+  code : in bit_vector(3 DOWNTO 0) ;	-- code
+  reset : in BIT;	-- reset
+  clk : in BIT;	-- clk
+  vdd : in BIT;	-- vdd
+  vss : in BIT;	-- vss
+  door : out BIT;	-- door
+  alarm : out BIT	-- alarm
+  );
+END coder;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE VBE OF coder IS
+  SIGNAL code_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- code_cs
+  SIGNAL code_cs_in0 : BIT;		-- code_cs_in0
+  SIGNAL code_ns_in0 : BIT;		-- code_ns_in0
+  SIGNAL code_cs_ina : BIT;		-- code_cs_ina
+  SIGNAL code_ns_ina : BIT;		-- code_ns_ina
+  SIGNAL code_cs_in6 : BIT;		-- code_cs_in6
+  SIGNAL code_ns_in6 : BIT;		-- code_ns_in6
+  SIGNAL code_cs_in2 : BIT;		-- code_cs_in2
+  SIGNAL code_ns_in2 : BIT;		-- code_ns_in2
+  SIGNAL code_cs_start : BIT;		-- code_cs_start
+  SIGNAL code_ns_start : BIT;		-- code_ns_start
+  SIGNAL code_ns : BIT_VECTOR(2 DOWNTO 0);	-- code_ns
+
+BEGIN
+  code_ns(0) <= (code_ns_start OR code_ns_in6 OR code_ns_in0);
+  code_ns(1) <= (code_ns_start OR code_ns_in2 OR code_ns_in0);
+  code_ns(2) <= (code_ns_in2 OR code_ns_in0);
+  code_ns_start <= (code_cs_in0 OR (code_cs_in2 AND (code(0) OR NOT(
+code(1)) OR NOT(code(2)) OR code(3))) OR (code_cs_in6 
+AND (code(0) OR NOT(code(1)) OR code(2) OR NOT(
+code(3)))) OR (code_cs_ina AND (code(0) OR code(1) OR 
+code(2) OR code(3))) OR (code_cs_start AND (code(0) OR 
+NOT(code(1)) OR code(2) OR code(3))));
+  code_cs_start <= (NOT(code_cs(2)) AND code_cs(1));
+  code_ns_in2 <= (code_cs_start AND NOT(code(0)) AND code(1) AND 
+NOT(code(2)) AND NOT(code(3)));
+  code_cs_in2 <= (code_cs(2) AND NOT(code_cs(0)));
+  code_ns_in6 <= (code_cs_in2 AND NOT(code(0)) AND code(1) AND 
+code(2) AND NOT(code(3)));
+  code_cs_in6 <= (NOT(code_cs(1)) AND code_cs(0));
+  code_ns_ina <= (code_cs_in6 AND NOT(code(0)) AND code(1) AND NOT
+(code(2)) AND code(3));
+  code_cs_ina <= (NOT(code_cs(2)) AND NOT(code_cs(0)));
+  code_ns_in0 <= (code_cs_ina AND NOT(code(0)) AND NOT(code(1)) 
+AND NOT(code(2)) AND NOT(code(3)));
+  code_cs_in0 <= (code_cs(2) AND code_cs(0));
+  label0 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    code_cs(0) <= GUARDED (code_ns(0) OR reset);
+  END BLOCK label0;
+  label1 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    code_cs(1) <= GUARDED (code_ns(1) OR reset);
+  END BLOCK label1;
+  label2 : BLOCK ((NOT((clk'STABLE)) AND clk) = '1')
+  BEGIN
+    code_cs(2) <= GUARDED (code_ns(2) AND NOT(reset));
+  END BLOCK label2;
+
+alarm <= ((code_cs_start AND ((NOT(reset) AND (code(0) OR 
+NOT(code(1)) OR code(2)) AND NOT(code(3))) OR (NOT(
+reset) AND NOT(code(0) AND NOT(code(1)) AND code(2) 
+AND daytime) AND code(3)))) OR (code_cs_in2 AND ((
+NOT(reset) AND NOT(NOT(code(0)) AND code(1) AND 
+code(2)) AND NOT(code(3))) OR (NOT(reset) AND NOT(
+code(0) AND NOT(code(1)) AND code(2) AND daytime) AND 
+code(3)))) OR (code_cs_in6 AND ((NOT(reset) AND NOT(
+code(3))) OR (NOT(reset) AND (code(0) OR NOT(code(1)) OR
+ code(2)) AND NOT(daytime)) OR (NOT(reset) AND 
+NOT(NOT(code(0)) AND code(1)) AND NOT(code(2))) OR (
+NOT(reset) AND (NOT(code(0)) OR code(1)) AND code(2)
+))) OR (code_cs_ina AND ((NOT(reset) AND (code(0) 
+OR code(1) OR code(2)) AND NOT(code(3))) OR (NOT(
+reset) AND NOT(code(0) AND NOT(code(1)) AND code(2) 
+AND daytime) AND code(3)))) OR (code_cs_in0 AND ((
+NOT(reset) AND NOT(daytime) AND code(3)) OR (NOT(
+reset) AND NOT(code(0) AND NOT(code(1)) AND code(2))))
+));
+
+door <= ((code_cs_start AND NOT(reset) AND code(0) AND 
+NOT(code(1)) AND code(2) AND daytime AND code(3)) OR
+ (code_cs_in2 AND NOT(reset) AND code(0) AND NOT(
+code(1)) AND code(2) AND daytime AND code(3)) OR (
+code_cs_in6 AND NOT(reset) AND code(0) AND NOT(code(1)) AND 
+code(2) AND daytime AND code(3)) OR (code_cs_ina AND NOT
+(reset) AND code(0) AND NOT(code(1)) AND code(2) 
+AND daytime AND code(3)) OR (code_cs_in0 AND NOT(
+reset) AND code(0) AND NOT(code(1)) AND code(2) AND 
+NOT(NOT(daytime) AND code(3))));
+END;

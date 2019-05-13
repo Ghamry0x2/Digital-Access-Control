@@ -1,0 +1,120 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/modeltech64_10.5/examples
+T_opt
+!s110 1555395610
+VIJ09=3e9Rd1G?HddQk5g22
+04 4 5 work code behav 1
+=1-f430b9aa3e02-5cb57418-2e3-3128
+Z1 o-quiet -auto_acc_if_foreign -work work
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;10.5;63
+R0
+T_opt1
+!s110 1555435842
+VO3F3cNJeWb8^945Bb2bVC0
+04 9 14 work testbench testbench_code 1
+=1-f430b9aa3e02-5cb61141-39e-6064
+R1
+R2
+n@_opt1
+R3
+Ecode
+Z4 w1555409182
+Z5 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z6 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z7 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z8 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z9 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z10 dD:/Faculty Of Engineering - Ain Shams University/Semester 6/CSE215 Electronic Design Automation/Project/Abdelrahman Ibrahim ELGhamry/Digital Access Control
+Z11 8D:\Faculty Of Engineering - Ain Shams University\Semester 6\CSE215 Electronic Design Automation\Project\Abdelrahman Ibrahim ELGhamry\Digital Access Control\code.vhd
+Z12 FD:\Faculty Of Engineering - Ain Shams University\Semester 6\CSE215 Electronic Design Automation\Project\Abdelrahman Ibrahim ELGhamry\Digital Access Control\code.vhd
+l0
+L7
+VFL3?EV6Gj[lB^gFJNKFI90
+!s100 U92B0>kfbgzJHFA?fJ4PR1
+Z13 OL;C;10.5;63
+32
+Z14 !s110 1555435833
+!i10b 1
+Z15 !s108 1555435833.000000
+Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:\Faculty Of Engineering - Ain Shams University\Semester 6\CSE215 Electronic Design Automation\Project\Abdelrahman Ibrahim ELGhamry\Digital Access Control\code.vhd|
+Z17 !s107 D:\Faculty Of Engineering - Ain Shams University\Semester 6\CSE215 Electronic Design Automation\Project\Abdelrahman Ibrahim ELGhamry\Digital Access Control\code.vhd|
+!i113 0
+Z18 o-work work -2002 -explicit
+Z19 tExplicit 1 CvgOpt 0
+Abehav
+R5
+R6
+R7
+R8
+R9
+Z20 DEx4 work 4 code 0 22 FL3?EV6Gj[lB^gFJNKFI90
+l24
+L20
+V;bF9a6l1V06_9^O868L]D0
+!s100 X4Nl_HlUDU1_`nm1BMdHI0
+R13
+32
+R14
+!i10b 1
+R15
+R16
+R17
+!i113 0
+R18
+R19
+Etestbench
+Z21 w1555435822
+R5
+R6
+R7
+R8
+R9
+R10
+Z22 8D:/Faculty Of Engineering - Ain Shams University/Semester 6/CSE215 Electronic Design Automation/Project/Abdelrahman Ibrahim ELGhamry/Digital Access Control/code_testbench.vhd
+Z23 FD:/Faculty Of Engineering - Ain Shams University/Semester 6/CSE215 Electronic Design Automation/Project/Abdelrahman Ibrahim ELGhamry/Digital Access Control/code_testbench.vhd
+l0
+L7
+V^NLkFM_Rl5:<4:g?i4RW82
+!s100 ]BRWGEni0jm4:1H8mKGF;1
+R13
+32
+R14
+!i10b 1
+R15
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|D:/Faculty Of Engineering - Ain Shams University/Semester 6/CSE215 Electronic Design Automation/Project/Abdelrahman Ibrahim ELGhamry/Digital Access Control/code_testbench.vhd|
+Z25 !s107 D:/Faculty Of Engineering - Ain Shams University/Semester 6/CSE215 Electronic Design Automation/Project/Abdelrahman Ibrahim ELGhamry/Digital Access Control/code_testbench.vhd|
+!i113 0
+R18
+R19
+Atestbench_code
+R20
+R5
+R6
+R7
+R8
+R9
+DEx4 work 9 testbench 0 22 ^NLkFM_Rl5:<4:g?i4RW82
+l44
+L10
+VA5gzhcz4KHz]SJ5^ecSTG3
+!s100 4XN3kLG@nnbh7Xk@KHY?d1
+R13
+32
+R14
+!i10b 1
+R15
+R24
+R25
+!i113 0
+R18
+R19

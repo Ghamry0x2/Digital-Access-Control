@@ -1,0 +1,68 @@
+-- VHDL data flow description generated from `codej_b`
+--		date : Sun Apr 21 05:04:00 2019
+
+
+-- Entity Declaration
+
+ENTITY codej_b IS
+  PORT (
+  daytime : in BIT;	-- daytime
+  code : in bit_vector(3 DOWNTO 0) ;	-- code
+  reset : in BIT;	-- reset
+  clk : in BIT;	-- clk
+  vdd : in BIT;	-- vdd
+  vss : in BIT;	-- vss
+  door : out BIT;	-- door
+  alarm : out BIT	-- alarm
+  );
+END codej_b;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF codej_b IS
+  SIGNAL code_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- code_cs
+  SIGNAL aux2 : BIT;		-- aux2
+  SIGNAL aux3 : BIT;		-- aux3
+  SIGNAL aux4 : BIT;		-- aux4
+  SIGNAL aux7 : BIT;		-- aux7
+  SIGNAL aux11 : BIT;		-- aux11
+  SIGNAL aux12 : BIT;		-- aux12
+  SIGNAL aux13 : BIT;		-- aux13
+  SIGNAL aux14 : BIT;		-- aux14
+
+BEGIN
+  aux14 <= (NOT(reset) AND NOT(code(1)));
+  aux13 <= NOT(code_cs(1) OR NOT(code_cs(2)));
+  aux12 <= (NOT(reset) AND code(1));
+  aux11 <= NOT(((code(0) OR (code_cs(0) XOR code(3))) OR 
+code(2)) OR code_cs(1));
+  aux7 <= NOT(((NOT(aux4) OR code(3)) OR NOT(code(2))) OR 
+NOT(code_cs(1)));
+  aux4 <= NOT(code(0) OR NOT(code_cs(0)));
+  aux3 <= NOT(NOT(aux2) OR NOT(code_cs(1)));
+  aux2 <= NOT(((code(0) OR code_cs(0)) OR code(3)) OR 
+code(2));
+  label0 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    code_cs (0) <= GUARDED (((aux2 AND NOT(code_cs(1)) AND NOT(code_cs(2))) 
+OR aux7) AND aux12);
+  END BLOCK label0;
+  label1 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    code_cs (1) <= GUARDED ((aux4 OR NOT(code_cs(2))) AND aux11 AND aux12);
+  END BLOCK label1;
+  label2 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    code_cs (2) <= GUARDED (aux3 AND aux14);
+  END BLOCK label2;
+
+alarm <= (((NOT(aux11) OR code_cs(2)) AND NOT(aux7) AND 
+aux12) OR ((NOT(code(0)) OR code_cs(0) OR code(3) OR 
+NOT(code(2)) OR NOT(aux13)) AND NOT(aux3) AND (NOT(
+code(0)) OR NOT(daytime) OR NOT(code(3)) OR NOT(code(2))
+) AND aux14));
+
+door <= ((code(3) OR aux13) AND code(0) AND (daytime OR 
+NOT(code(3))) AND code(2) AND aux14);
+END;

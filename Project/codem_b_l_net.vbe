@@ -1,0 +1,118 @@
+-- VHDL data flow description generated from `codem_b_l_net`
+--		date : Sun Apr 21 05:46:34 2019
+
+
+-- Entity Declaration
+
+ENTITY codem_b_l_net IS
+  PORT (
+  alarm : out BIT;	-- alarm
+  door : out BIT;	-- door
+  vss : in BIT;	-- vss
+  vdd : in BIT;	-- vdd
+  clk : in BIT;	-- clk
+  reset : in BIT;	-- reset
+  code : in bit_vector(3 DOWNTO 0) ;	-- code
+  daytime : in BIT	-- daytime
+  );
+END codem_b_l_net;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF codem_b_l_net IS
+  SIGNAL code_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- code_cs
+  SIGNAL on12_x1_sig : BIT;		-- on12_x1_sig
+  SIGNAL a3_x2_sig : BIT;		-- a3_x2_sig
+  SIGNAL not_aux8 : BIT;		-- not_aux8
+  SIGNAL not_aux0 : BIT;		-- not_aux0
+  SIGNAL na3_x1_sig : BIT;		-- na3_x1_sig
+  SIGNAL not_aux11 : BIT;		-- not_aux11
+  SIGNAL o4_x2_sig : BIT;		-- o4_x2_sig
+  SIGNAL not_aux17 : BIT;		-- not_aux17
+  SIGNAL not_code_cs : BIT_VECTOR(2 DOWNTO 1);	-- not_code_cs
+  SIGNAL not_aux19 : BIT;		-- not_aux19
+  SIGNAL not_aux3 : BIT;		-- not_aux3
+  SIGNAL not_aux2 : BIT;		-- not_aux2
+  SIGNAL not_code : BIT_VECTOR(2 DOWNTO 1);	-- not_code
+  SIGNAL aux19 : BIT;		-- aux19
+  SIGNAL aux18 : BIT;		-- aux18
+  SIGNAL aux1 : BIT;		-- aux1
+  SIGNAL o3_x2_sig : BIT;		-- o3_x2_sig
+  SIGNAL na2_x1_sig : BIT;		-- na2_x1_sig
+  SIGNAL an12_x1_sig : BIT;		-- an12_x1_sig
+  SIGNAL o2_x2_sig : BIT;		-- o2_x2_sig
+  SIGNAL no4_x1_sig : BIT;		-- no4_x1_sig
+  SIGNAL on12_x1_2_sig : BIT;		-- on12_x1_2_sig
+  SIGNAL o2_x2_2_sig : BIT;		-- o2_x2_2_sig
+  SIGNAL a3_x2_2_sig : BIT;		-- a3_x2_2_sig
+  SIGNAL no2_x1_sig : BIT;		-- no2_x1_sig
+  SIGNAL oa22_x2_sig : BIT;		-- oa22_x2_sig
+  SIGNAL no2_x1_2_sig : BIT;		-- no2_x1_2_sig
+  SIGNAL na2_x1_2_sig : BIT;		-- na2_x1_2_sig
+  SIGNAL na3_x1_3_sig : BIT;		-- na3_x1_3_sig
+  SIGNAL na3_x1_2_sig : BIT;		-- na3_x1_2_sig
+  SIGNAL o2_x2_3_sig : BIT;		-- o2_x2_3_sig
+  SIGNAL on12_x1_3_sig : BIT;		-- on12_x1_3_sig
+  SIGNAL na4_x1_sig : BIT;		-- na4_x1_sig
+  SIGNAL no2_x1_3_sig : BIT;		-- no2_x1_3_sig
+  SIGNAL mbk_buf_not_aux11 : BIT;		-- mbk_buf_not_aux11
+
+BEGIN
+  mbk_buf_not_aux11 <= not_aux11;
+  no2_x1_3_sig <= NOT((reset OR not_aux8));
+  na4_x1_sig <= NOT((((on12_x1_3_sig AND na3_x1_2_sig) AND 
+na2_x1_2_sig) AND oa22_x2_sig));
+  on12_x1_3_sig <= (NOT(not_code_cs(1)) OR o2_x2_3_sig);
+  o2_x2_3_sig <= (code(1) OR code(2));
+  na3_x1_2_sig <= NOT(((code(2) AND not_aux3) AND na3_x1_3_sig));
+  na3_x1_3_sig <= NOT(((daytime AND code(3)) AND not_aux0));
+  na2_x1_2_sig <= NOT((no2_x1_2_sig AND code_cs(1)));
+  no2_x1_2_sig <= NOT((code(2) OR not_code(1)));
+  oa22_x2_sig <= ((not_code_cs(2) AND no2_x1_sig) OR code(2));
+  no2_x1_sig <= NOT((code(0) OR code(3)));
+  a3_x2_2_sig <= ((aux18 AND not_aux8) AND o2_x2_2_sig);
+  o2_x2_2_sig <= (code_cs(1) OR not_aux11);
+  on12_x1_2_sig <= (NOT(not_aux17) OR no4_x1_sig);
+  no4_x1_sig <= NOT((((code_cs(1) OR o2_x2_sig) OR code_cs(2)) OR
+ not_aux19));
+  o2_x2_sig <= (code(2) OR not_aux2);
+  an12_x1_sig <= (NOT(mbk_buf_not_aux11) AND aux18);
+  na2_x1_sig <= NOT((not_aux17 AND o3_x2_sig));
+  o3_x2_sig <= ((not_aux19 OR not_aux3) OR not_code(2));
+  aux1 <= NOT((code(0) OR not_code(1)));
+  aux18 <= (NOT(reset) AND code_cs(0));
+  aux19 <= NOT((reset OR code_cs(0)));
+  not_code (1) <= NOT(code(1));
+  not_code (2) <= NOT(code(2));
+  not_aux2 <= (NOT(aux1) OR code(3));
+  not_aux3 <= (not_aux2 OR not_code_cs(2));
+  not_aux19 <= NOT(aux19);
+  not_code_cs (1) <= NOT(code_cs(1));
+  not_code_cs (2) <= NOT(code_cs(2));
+  not_aux17 <= (((o4_x2_sig OR code(2)) OR code_cs(2)) OR 
+not_code_cs(1));
+  o4_x2_sig <= (((code(0) OR code(1)) OR reset) OR code(3));
+  not_aux11 <= (code_cs(2) OR na3_x1_sig);
+  na3_x1_sig <= NOT(((code(3) AND not_code(2)) AND aux1));
+  not_aux0 <= (code(0) AND not_code(1));
+  not_aux8 <= NOT(((code_cs(2) OR code(3)) AND a3_x2_sig));
+  a3_x2_sig <= ((code(2) AND not_aux0) AND on12_x1_sig);
+  on12_x1_sig <= (NOT(code(3)) OR daytime);
+  label0 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    code_cs (0) <= GUARDED na2_x1_sig;
+  END BLOCK label0;
+  label1 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    code_cs (1) <= GUARDED an12_x1_sig;
+  END BLOCK label1;
+  label2 : BLOCK (NOT(((clk AND NOT((clk'STABLE))) XOR '1')) = '1')
+  BEGIN
+    code_cs (2) <= GUARDED on12_x1_2_sig;
+  END BLOCK label2;
+
+alarm <= ((na4_x1_sig AND aux19) OR a3_x2_2_sig);
+
+door <= ((code_cs(0) OR code(3)) AND no2_x1_3_sig);
+END;

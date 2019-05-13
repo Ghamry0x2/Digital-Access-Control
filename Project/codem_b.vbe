@@ -1,0 +1,71 @@
+-- VHDL data flow description generated from `codem_b`
+--		date : Sun Apr 21 05:04:00 2019
+
+
+-- Entity Declaration
+
+ENTITY codem_b IS
+  PORT (
+  daytime : in BIT;	-- daytime
+  code : in bit_vector(3 DOWNTO 0) ;	-- code
+  reset : in BIT;	-- reset
+  clk : in BIT;	-- clk
+  vdd : in BIT;	-- vdd
+  vss : in BIT;	-- vss
+  door : out BIT;	-- door
+  alarm : out BIT	-- alarm
+  );
+END codem_b;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF codem_b IS
+  SIGNAL code_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- code_cs
+  SIGNAL aux0 : BIT;		-- aux0
+  SIGNAL aux1 : BIT;		-- aux1
+  SIGNAL aux2 : BIT;		-- aux2
+  SIGNAL aux3 : BIT;		-- aux3
+  SIGNAL aux8 : BIT;		-- aux8
+  SIGNAL aux11 : BIT;		-- aux11
+  SIGNAL aux17 : BIT;		-- aux17
+  SIGNAL aux18 : BIT;		-- aux18
+  SIGNAL aux19 : BIT;		-- aux19
+
+BEGIN
+  aux19 <= (NOT(reset) AND NOT(code_cs(0)));
+  aux18 <= (NOT(reset) AND code_cs(0));
+  aux17 <= ((((((NOT(code(1)) AND NOT(code(0))) AND NOT(
+code(3))) AND NOT(code_cs(2))) AND NOT(code(2))) AND 
+code_cs(1)) AND NOT(reset));
+  aux11 <= NOT(((NOT(aux1) OR NOT(code(3))) OR code_cs(2)) 
+OR code(2));
+  aux8 <= NOT(((NOT(code(3)) AND NOT(code_cs(2))) OR (aux0 
+OR (NOT(daytime) AND code(3)))) OR NOT(code(2)));
+  aux3 <= NOT(NOT(aux2) OR NOT(code_cs(2)));
+  aux2 <= NOT(NOT(aux1) OR code(3));
+  aux1 <= NOT(NOT(code(1)) OR code(0));
+  aux0 <= (code(1) OR NOT(code(0)));
+  label0 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    code_cs (0) <= GUARDED ((aux3 AND code(2) AND aux19) OR aux17);
+  END BLOCK label0;
+  label1 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    code_cs (1) <= GUARDED (aux11 AND aux18);
+  END BLOCK label1;
+  label2 : BLOCK ((clk AND NOT((clk'STABLE))) = '1')
+  BEGIN
+    code_cs (2) <= GUARDED ((aux2 AND NOT(code_cs(2)) AND NOT(code(2)) AND 
+NOT(code_cs(1)) AND aux19) OR aux17);
+  END BLOCK label2;
+
+alarm <= (((NOT(aux11) OR code_cs(1)) AND NOT(aux8) AND 
+aux18) OR (((NOT(aux3) AND (aux0 OR NOT(daytime) OR 
+NOT(code(3))) AND code(2)) OR ((code(0) OR code(3) 
+OR code_cs(2)) AND NOT(code(2))) OR (code(1) AND 
+NOT(code(2)) AND code_cs(1)) OR (NOT(code(1)) AND 
+NOT(code(2)) AND NOT(code_cs(1)))) AND aux19));
+
+door <= ((code(3) OR code_cs(0)) AND aux8 AND NOT(reset));
+END;
